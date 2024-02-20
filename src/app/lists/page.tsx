@@ -12,8 +12,7 @@ import React from "react";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { format } from "date-fns"
+ 
 
 import {
   Form,
@@ -21,7 +20,7 @@ import {
   FormControl,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage,FormDescription
 } from "@/components/ui/form";
 import {
   Dialog,
@@ -32,33 +31,24 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/invoices/data-table";
-import { columns } from "@/components/invoices/columns";
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
+import { columns } from "@/components/invoices/columns"; 
 import { Input } from "@/components/ui/input";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
   const formSchema = z.object({
-    number: z.string().min(2).max(50),
+    check: z.boolean(),
     date: z.date({
       required_error: "A date is required.",
-    }),
-    payDate: z.string().min(2).max(50),
-    company: z.string().min(2).max(50),
-    jobType: z.string().min(2).max(50),
-    value: z.string().min(2).max(50),
+    }), 
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      number: "",
-      date: "",
-      payDate: "",
-      company: "",
-      jobType: "",
-      value: "",
+      text: "",
+      date: Date.now(),
+      check: false, 
     },
   });
 
@@ -82,17 +72,16 @@ const Dashboard = () => {
   }
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const { number, date, payDate, company, jobType, value } = values;
+    const { text } = values;
+
+    console.log(text)
     try {
       await fetch("/api/posts", {
         method: "POST",
         body: JSON.stringify({
-          number,
-          date,
-          payDate,
-          company,
-          jobType,
-          value,
+          check: false,
+          text, 
+          date : Date.now(), 
           username: session?.data?.user?.name || "anonymous",
         }),
       });
@@ -126,124 +115,33 @@ const Dashboard = () => {
                   <DialogTitle className="py-3">
                     Crie uma tarefa
                   </DialogTitle>
-                  <Form {...form}>
+
+                  <div className="space-y-1 leading-none">
+                        <p className="text-sm font-medium ">
+                          Tarefa para a todolist de &#39;{session?.data?.user?.name}&#39;
+                        </p>
+                        <p className="text-sm font-medium text-muted-foreground">
+                          Digite uma tarefa a seguir
+                        </p>
+                  </div>
+                  <Form {...form}> 
                     <form
                       onSubmit={form.handleSubmit(onSubmit)}
                       className="space-y-8"
-                    >
-                      <FormField
+                    > 
+                       <FormField
                         control={form.control}
-                        name="number"
+                        name="text"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Number</FormLabel>
+                            <FormLabel>Text</FormLabel>
                             <FormControl>
-                              <Input placeholder="NFS-e number" {...field} />
+                              <Input placeholder="Text" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="date"
-                        render={({ field }) => (<FormItem>
-                          <FormLabel>Date</FormLabel>
-                          <FormControl>
-                            <Popover>
-                              <PopoverTrigger asChild>
-                                <Button
-                                  variant={"outline"}
-                                  className={cn(
-                                    "w-[280px] justify-start text-left font-normal",
-                                    !field.value && "text-muted-foreground"
-                                  )}
-                                >
-                                  <CalendarIcon className="mr-2 h-4 w-4" />
-                                  {field.value ? (
-                                    format(field.value, "PPP")
-                                  ) : (
-                                    <span>Pick a date</span>
-                                  )}
-                                </Button>
-                              </PopoverTrigger>
-                              <PopoverContent className="w-auto p-0">
-                                <Calendar
-                                  mode="single"
-                                  selected={field.value}
-                                  onSelect={field.onChange}
-                                  disabled={(date) =>
-                                    date > new Date() || date < new Date("1900-01-01")
-                                  }
-
-                                  initialFocus
-                                />
-                              </PopoverContent>
-                            </Popover>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="payDate"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>payDate</FormLabel>
-                            <FormControl>
-                              <Input placeholder="NFS-e payday" {...field} />
-                            </FormControl>
-
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="company"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>company</FormLabel>
-                            <FormControl>
-                              <Input placeholder="company" {...field} />
-                            </FormControl>
-
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="jobType"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Type of Service Provided</FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="Type of Service Provided"
-                                {...field}
-                              />
-                            </FormControl>
-
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="value"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>valor</FormLabel>
-                            <FormControl>
-                              <Input placeholder="NFS-e value" {...field} />
-                            </FormControl>
-
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                      />     
                       <Button type="submit">Send</Button>
                     </form>
                   </Form>

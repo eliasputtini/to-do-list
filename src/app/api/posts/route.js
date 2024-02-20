@@ -46,23 +46,15 @@ export const POST = async (request) => {
   }
 };
 
-export const DELETE = async (id) => {
- 
+export async function DELETE(id) {
+  try { 
 
-  try {
-    await connect();
-
-    // Find the post by ID and delete it
-    const deletedPost = await Post.findOneAndDelete({ _id: id });console.log(deletedPost)
-
-
-    if (!deletedPost) {
-      return new NextResponse("Post not found", { status: 404 });
-    }
-
-    return new NextResponse("Post has been deleted", { status: 200 });
-  } catch (err) {
-    return new NextResponse("Database Error", { status: 500 });
+   
+    console.log( await Post.find(id))
+    return NextResponse.json({ message: "Ticket Deleted" }, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ message: "Error", error }, { status: 500 });
   }
-};
-
+}
+ 
