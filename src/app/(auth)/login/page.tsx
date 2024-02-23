@@ -32,7 +32,7 @@ const Login = () => {
   }
 
   if (session.status === "authenticated") {
-    router?.push("/lists");
+    router?.push("/todos");
   }
 
   const handleSubmit = (e) => {
@@ -78,7 +78,7 @@ const Login = () => {
                 Login
               </h1>
               <p className="text-sm text-muted-foreground">
-                Please sign in to see the lists!
+                Please sign in to see the todos!
               </p>
             </div>
             <div className={cn("grid gap-6")}>
@@ -138,16 +138,18 @@ const Login = () => {
               </Button>
             </div>
             <Button
-                variant="outline"
-                type="button"
-                disabled={session?.status === "loading"}
-                onClick={()=>{ signIn("credentials", {
-                  email:'teste@teste.com',
-                  password:'teste',
-                });}}
-              >
-                 Guest login 
-              </Button>
+              variant="outline"
+              type="button"
+              disabled={session?.status === "loading"}
+              onClick={() => {
+                signIn("credentials", {
+                  email: 'teste@teste.com',
+                  password: 'teste',
+                });
+              }}
+            >
+              Guest login
+            </Button>
           </div>
         </div>
       </div>

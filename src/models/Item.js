@@ -2,17 +2,21 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const PostSchema = new Schema(
+const ItemSchema = new Schema(
   {
     check: {
       type: Boolean,
       required: true,
     },
     text: {
-      type: Date,
+      type: String,
       required: true,
     },
     date: {
+      type: Date,
+      required: true,
+    },
+    username: {
       type: String,
       required: true,
     },
@@ -20,5 +24,5 @@ const PostSchema = new Schema(
   { timestamps: true }
 );
 
-//If the Post collection does not exist create a new one.
-export default mongoose.models?.Post || mongoose.model('Post', PostSchema);
+//If the Item collection does not exist create a new one.
+export default mongoose.models?.Item || mongoose.model('Item', ItemSchema);

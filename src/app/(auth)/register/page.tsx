@@ -36,7 +36,7 @@ const Register = () => {
         }),
       });
       res.status === 201 &&
-        router.push("/lists/login?success=Account has been created");
+        router.push("/login?success=Account has been created");
     } catch (err: any) {
       setError(err);
       console.log(err);

@@ -1,14 +1,14 @@
 //@ts-nocheck
-"use client"; import Post from "@/models/Post";
-//@ts-nocheck
+"use client";
 import React from "react";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
- 
+import { useParams } from 'next/navigation'
 
-const handleDelete = async (id,mutate) => {
+
+const handleDelete = async (id, mutate, params) => {
   try {
-    await fetch(`/api/posts/${id}`, {
+    await fetch(`/api/todos/${params.id}/${id}`, {
       method: "DELETE",
     });
     mutate();
@@ -18,11 +18,14 @@ const handleDelete = async (id,mutate) => {
 };
 
 function Delete({ id }: any) {
+
+  const params = useParams()
+
   const session = useSession();
 
   const fetcher = (...args: any) => fetch(...args).then((res) => res.json());
   const { data, mutate, error, isLoading } = useSWR(
-    `/api/posts?username=${session?.data?.user?.name}`,
+    `/api/todos/${params.id}`,
     fetcher
   );
 
@@ -30,8 +33,7 @@ function Delete({ id }: any) {
     <div
       className="text-right font-medium"
       onClick={() => {
-        handleDelete(id,mutate)
-        // mutate();
+        handleDelete(id, mutate, params)
       }}
     >
       delete

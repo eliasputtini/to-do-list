@@ -11,8 +11,8 @@ const links = [
   },
   {
     id: 2,
-    title: "Lists",
-    url: "/lists",
+    title: "To-do Lists",
+    url: "/todos",
   },
 ];
 
@@ -22,7 +22,7 @@ const Navbar = () => {
   return (
     <div className="h-[100px] flex justify-between items-center px-4">
       <Link href="/" className="font-bold text-2xl">
-        To-do list 
+        To-do list
       </Link>
       <div className="flex items-center gap-4">
         {links.map((link) => (

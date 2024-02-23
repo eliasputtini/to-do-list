@@ -32,7 +32,7 @@ const handler = NextAuth({
               throw new Error("Wrong Credentials!");
             }
           } else {
-            throw new Error("User not found!");
+            throw new Error("Item not found!");
           }
         } catch (err) {
           throw new Error(err);
