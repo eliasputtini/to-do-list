@@ -30,8 +30,8 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { DataTable } from "@/components/lists/data-table";
-import { columns } from "@/components/lists/columns";
+import { DataTable } from "@/components/items/data-table";
+import { columns } from "@/components/items/columns";
 import { Input } from "@/components/ui/input";
 
 const Todos = ({

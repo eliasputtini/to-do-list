@@ -31,10 +31,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { format } from 'date-fns'
+import Delete from "@/components/lists/delete";
 
 const TodoCard = ({ todo, router }) => {
   // Extract todo data
-  const { title, createdAt, permalink } = todo;
+  const { title, createdAt, permalink, _id } = todo;
 
   return (
     <div className=" p-4 mb-4 rounded-md cursor-pointer border-2 border-[#80cbc4]" onClick={() => router?.push(`todos/${permalink}`)}>
@@ -48,6 +49,8 @@ const TodoCard = ({ todo, router }) => {
         {/* Name */}
         <p>Title: {title}</p>
       </div>
+
+      <Delete id={_id} />
     </div>
   );
 };
@@ -111,6 +114,7 @@ const Todos = () => {
     return (
       <div className="flex flex-col gap-10">
         <div className="flex flex-col flex-1 gap-10">
+          <p>Bem vindo de volta &apos;{session?.data?.user?.name}&apos;</p>
           <div className="flex justify-between">
             <Form {...form}>
               <Dialog open={open} onOpenChange={setOpen}>

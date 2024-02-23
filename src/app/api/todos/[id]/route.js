@@ -21,6 +21,24 @@ export const GET = async (request, { params }) => {
   }
 };
 
+export const DELETE = async (request, { params }) => {
+  const { id } = params;  
+
+  try {
+    await connect();
+    const list = await List.findByIdAndDelete(id);
+    
+    if (!list) {
+      return new NextResponse("List not found", { status: 404 });
+    }
+
+    return new NextResponse("List deleted successfully", { status: 200 });
+  } catch (err) { 
+    console.error("Internal error:", err);
+    return new NextResponse("Database Error", { status: 500 });
+  }
+};
+
 
 
 export const POST = async (request, { params }) => {

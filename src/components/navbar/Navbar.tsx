@@ -11,7 +11,7 @@ const links = [
   },
   {
     id: 2,
-    title: "To-do Lists",
+    title: "Lists",
     url: "/todos",
   },
 ];

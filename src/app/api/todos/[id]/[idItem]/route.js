@@ -4,7 +4,7 @@ import List from "@/models/List";
 
 export const DELETE = async (request, { params }) => {
     console.log(params)
-    const { id, itemId } = params; // Assuming you have separate IDs for list and item
+    const { id, idItem } = params; // Assuming you have separate IDs for list and item
     
     try {
       await connect(); // Connect to the database
@@ -18,10 +18,9 @@ export const DELETE = async (request, { params }) => {
       }
 
       // Find the index of the item to delete in the todos array
-      const index = list[0].todos.findIndex(todo => todo._id.toString() === itemId);
+      const index = list[0].todos.findIndex(todo => todo._id.toString() === idItem);
 
       
-      console.log(index)
 
       // Check if the item was found
       if (index === -1) {
@@ -29,10 +28,10 @@ export const DELETE = async (request, { params }) => {
       }
 
       // Remove the item from the todos array
-      list.todos.splice(index, 1);
+      list[0].todos.splice(index, 1);
 
       // Save the updated list document
-      await list.save();
+      await list[0].save();
   
       return new NextResponse("Item has been deleted", { status: 200 });
     } catch (err) {

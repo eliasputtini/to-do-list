@@ -4,11 +4,12 @@ import React from "react";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import { useParams } from 'next/navigation'
+import { Button } from "@/components/ui/button";
 
 
 const handleDelete = async (id, mutate, params) => {
   try {
-    await fetch(`/api/todos/${id}`, {
+    await fetch(`/api/todos/${params.id}/${id}`, {
       method: "DELETE",
     });
     mutate();
@@ -18,7 +19,6 @@ const handleDelete = async (id, mutate, params) => {
 };
 
 function Delete({ id }: any) {
-  console.log('asdasd', id)
 
   const params = useParams()
 
@@ -31,14 +31,14 @@ function Delete({ id }: any) {
   );
 
   return (
-    <div
+    <Button
       className="text-right font-medium"
       onClick={() => {
         handleDelete(id, mutate, params)
       }}
     >
       delete
-    </div>
+    </Button>
   );
 }
 
