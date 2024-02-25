@@ -33,7 +33,7 @@ import { Input } from "@/components/ui/input";
 import { format } from 'date-fns'
 import Delete from "@/components/lists/delete";
 
-const TodoCard = ({ todo, router }) => {
+const TodoCard = ({ todo, router, mutate }) => {
   // Extract todo data
   const { title, createdAt, permalink, _id } = todo;
 
@@ -50,7 +50,7 @@ const TodoCard = ({ todo, router }) => {
         <p>Title: {title}</p>
       </div>
 
-      <Delete id={_id} />
+      <Delete id={_id} mutate={mutate} />
     </div>
   );
 };
@@ -93,7 +93,6 @@ const Todos = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { title } = values;
 
-    console.log(title)
     try {
       await fetch("/api/todos", {
         method: "POST",
@@ -165,7 +164,7 @@ const Todos = () => {
           </div>
           <div>
             {data && data.map((todo, index) => (
-              <TodoCard key={index} todo={todo} router={router} />
+              <TodoCard key={index} todo={todo} router={router} mutate={mutate} />
             ))}
           </div>
         </div>

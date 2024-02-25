@@ -20,7 +20,7 @@ const Login = () => {
   const params = useSearchParams();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  console.log(session);
+
 
   useEffect(() => {
     setError(params.get("error"));

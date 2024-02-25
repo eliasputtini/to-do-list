@@ -4,6 +4,7 @@ import React from "react";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import { useParams } from 'next/navigation'
+import { Button } from "../ui/button";
 
 
 const handleDelete = async (id, mutate, params) => {
@@ -17,28 +18,23 @@ const handleDelete = async (id, mutate, params) => {
   }
 };
 
-function Delete({ id }: any) {
-  console.log('asdasd', id)
+function Delete({ id, mutate }: any) {
 
   const params = useParams()
 
-  const session = useSession();
 
-  const fetcher = (...args: any) => fetch(...args).then((res) => res.json());
-  const { data, mutate, error, isLoading } = useSWR(
-    `/api/todos/${params.id}`,
-    fetcher
-  );
 
   return (
-    <div
+    <Button
       className="text-right font-medium"
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation(); // Prevent propagation to the parent container
+
         handleDelete(id, mutate, params)
       }}
     >
       delete
-    </div>
+    </Button>
   );
 }
 

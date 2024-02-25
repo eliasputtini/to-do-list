@@ -29,8 +29,7 @@ export const POST = async (request) => {
     await newPost.save();
 
     return new NextResponse("TodoList has been created", { status: 201 });
-  } catch (error) {
-    console.log("internal error");
+  } catch (error) { 
     console.dir(error);  // print on server console
     res.status(500).json({ message: "Internal error", error: error }); // not needed, only if you need in client side
     return;

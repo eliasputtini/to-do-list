@@ -152,7 +152,7 @@ const Todos = ({
                         {isLoading ? (
                             "loading"
                         ) : (
-                            <DataTable columns={columns} data={data.todos || []} mutate={mutate} />
+                            <DataTable columns={columns} data={data?.todos || []} mutate={mutate} />
                         )}
                     </div>
                 </div>

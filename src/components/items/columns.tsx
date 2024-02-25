@@ -2,8 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import Delete from "./delete";
-import { format } from "date-fns";
-import { Checkbox } from "@/components/ui/checkbox";
+import Put from "./put";
 
 
 // This type is used to define the shape of our data.
@@ -15,13 +14,7 @@ export const columns: ColumnDef<any>[] = [
     header: "To-do List",
     size: 10,
     cell: ({ row }) => {
-      return <div> <Checkbox
-        checked={
-          row.original.checked
-        }
-        onCheckedChange={(value) => console.log(!!value)}
-        aria-label="Select all"
-      /></div>;
+      return <Put id={row.original._id} value={row.original.check} />
     },
   },
   {
