@@ -1,8 +1,6 @@
 //@ts-nocheck
 "use client";
 import React from "react";
-import useSWR from "swr";
-import { useSession } from "next-auth/react";
 import { useParams } from 'next/navigation'
 import { Button } from "../ui/button";
 
@@ -33,7 +31,7 @@ function Delete({ id, mutate }: any) {
         handleDelete(id, mutate, params)
       }}
     >
-      delete
+      Delete
     </Button>
   );
 }

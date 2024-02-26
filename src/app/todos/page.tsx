@@ -38,16 +38,16 @@ const TodoCard = ({ todo, router, mutate }) => {
   const { title, createdAt, permalink, _id } = todo;
 
   return (
-    <div className=" p-4 mb-4 rounded-md cursor-pointer border-2 border-[#80cbc4]" onClick={() => router?.push(`todos/${permalink}`)}>
-      {/* Image */}
-      <img width={64} height={64} src={`https://api.dicebear.com/7.x/icons/svg?seed=${title}&backgroundColor=80cbc4`} alt="Todo Image" />
+    <div className="flex justify-between p-4 mb-4 rounded-md cursor-pointer border-2 border-[#E8505B]" onClick={() => router?.push(`todos/${permalink}`)}>
+      <div className="flex gap-2">
+        <img width={64} height={64} src={`https://api.dicebear.com/7.x/icons/svg?seed=${title}&backgroundColor=E8505B`} alt="Todo Image" />
 
-      {/* Text content */}
-      <div className="card-content">
-        {/* Time */}
-        <p>Date: {format(createdAt, 'dd/MM/yyyy')}</p>
-        {/* Name */}
-        <p>Title: {title}</p>
+        <div className="card-content">
+
+          <p>Date: {format(createdAt, 'dd/MM/yyyy')}</p>
+
+          <p>Title: {title}</p>
+        </div>
       </div>
 
       <Delete id={_id} mutate={mutate} />
@@ -117,10 +117,10 @@ const Todos = () => {
           <div className="flex justify-between">
             <Form {...form}>
               <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTrigger>
-                  <div className="p-5 bg-[#5a50e8] rounded text-white font-bold">
+                <DialogTrigger asChild>
+                  <Button className="p-5 rounded text-white font-bold">
                     Crie uma To-do List
-                  </div>
+                  </Button>
                 </DialogTrigger>
                 <DialogContent>
                   <form
