@@ -15,7 +15,7 @@ Deploy link:
 
 ## Funcionalidades Principais
 
-- **Autenticação**: A aplicação oferece a opção de autenticação para os usuários. Os usuários podem criar uma conta fornecendo um email e senha válidos ou optar por entrar como visitantes.
+- **Autenticação Segura**: A aplicação oferece a opção de autenticação para os usuários. Os usuários podem criar uma conta fornecendo um email e senha válidos ou optar por entrar como visitantes. É utilizado o Bcrypt, que é um algoritmo de hashing projetado especificamente para o armazenamento seguro de senhas
 - **Criar Lista**: Os usuários podem criar novas listas clicando no botão "Criar nova Lista" e inserindo o nome da Lista desejada.
 - **Adicionar Tarefa**: Os usuários podem adicionar novas tarefas à lista clicando no botão "Adicionar Tarefa" e inserindo o nome da tarefa desejada.
 - **Marcar como Concluída**: Os usuários podem marcar uma tarefa como concluída clicando no checkbox ao lado da tarefa.
