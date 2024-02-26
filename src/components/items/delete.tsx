@@ -33,6 +33,7 @@ function Delete({ id }: any) {
   return (
     <Button
       className="text-right font-medium"
+      variant='destructive'
       onClick={() => {
         handleDelete(id, mutate, params)
       }}

@@ -53,11 +53,13 @@ const TodoCard = ({ todo, router, mutate, onCopyPermalink }) => {
         <div className="card-content">
           <p>Date: {format(createdAt, 'dd/MM/yyyy')}</p>
           <p>Title: {title}</p>
-          <Button onClick={onCopyPermalink(permalink)}>Share</Button>
         </div>
       </div>
 
-      <Delete id={_id} mutate={mutate} />
+      <div className="flex gap-2 items-center">
+        <Button onClick={onCopyPermalink(permalink)}>Share</Button>
+        <Delete id={_id} mutate={mutate} />
+      </div>
     </div>
   );
 };

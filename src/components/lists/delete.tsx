@@ -25,6 +25,7 @@ function Delete({ id, mutate }: any) {
   return (
     <Button
       className="text-right font-medium"
+      variant='destructive'
       onClick={(e) => {
         e.stopPropagation(); // Prevent propagation to the parent container
 
