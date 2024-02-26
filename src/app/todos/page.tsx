@@ -33,7 +33,15 @@ import { Input } from "@/components/ui/input";
 import { format } from 'date-fns'
 import Delete from "@/components/lists/delete";
 
-const TodoCard = ({ todo, router, mutate }) => {
+const copyPermalink = (permalink) => (e) => {
+  e.stopPropagation();
+  const currentUrl = window.location.href;
+  const permalinkUrl = `${currentUrl}/${permalink}`;
+  navigator.clipboard.writeText(permalinkUrl);
+  alert("Permalink copied to clipboard!");
+};
+
+const TodoCard = ({ todo, router, mutate, onCopyPermalink }) => {
   // Extract todo data
   const { title, createdAt, permalink, _id } = todo;
 
@@ -43,10 +51,9 @@ const TodoCard = ({ todo, router, mutate }) => {
         <img width={64} height={64} src={`https://api.dicebear.com/7.x/icons/svg?seed=${title}&backgroundColor=E8505B`} alt="Todo Image" />
 
         <div className="card-content">
-
           <p>Date: {format(createdAt, 'dd/MM/yyyy')}</p>
-
           <p>Title: {title}</p>
+          <Button onClick={onCopyPermalink(permalink)}>Share</Button>
         </div>
       </div>
 
@@ -164,7 +171,7 @@ const Todos = () => {
           </div>
           <div>
             {data && data.map((todo, index) => (
-              <TodoCard key={index} todo={todo} router={router} mutate={mutate} />
+              <TodoCard key={index} todo={todo} router={router} mutate={mutate} onCopyPermalink={copyPermalink} />
             ))}
           </div>
         </div>
