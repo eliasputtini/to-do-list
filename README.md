@@ -20,3 +20,11 @@ Deploy link:
 - **Adicionar Tarefa**: Os usuários podem adicionar novas tarefas à lista clicando no botão "Adicionar Tarefa" e inserindo o nome da tarefa desejada.
 - **Marcar como Concluída**: Os usuários podem marcar uma tarefa como concluída clicando no checkbox ao lado da tarefa.
 - **Excluir Tarefa**: Os usuários podem excluir uma tarefa da lista clicando no botão de Delete ao lado da tarefa.
+- **Compartilhas Lista**: Os usuários podem compartilhar o link de uma lista clicando no botão de Share na lista.
+
+## Melhorias a se fazer
+
+- Impedir que o usuário cadastre-se com caracteres de espaço pois pode causar bugs
+- Melhor lógica para criação do permalink. Utilizando Hash e impedindo listas duplicadas
+- Implementação de loading e melhor design
+- Edição e ordenação das tarefas
